@@ -1,0 +1,70 @@
+<div class="navbar-fixed">
+<nav>
+    <div class="nav-wrapper">
+
+      <a href="/" class="brand-logo">Инвест блог</a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+         {{#if isAuth}}
+         <li>
+            <div class="account_container">
+              <a href="#" data-target="slide-out" class="sidenav-trigger" id="profile_"><i class="material-icons">account_box</i></a>
+            </div>
+         </li>
+       
+        {{/if}}
+
+        {{#if isHome}} 
+        <li class ="active"><a href="/">Главная</a></li>
+        {{else}}
+        <li><a href="/">Главная</a></li>
+        {{/if}}
+
+         {{#if isBlog}} 
+        <li class ="active"><a href="/">Блог</a></li>
+        {{else}}
+        <li><a href="/blog">Блог</a></li>
+        {{/if}}
+       
+    {{#if isAuth}}
+        {{#if isAdd}} 
+        <li class ="active"><a href="/add">Добавить</a></li>
+        {{else}}
+        <li><a href="/add">Добавить</a></li>
+        {{/if}}
+
+        {{#if isOrder}} 
+        <li class ="active"><a href="/">Заказы</a></li>
+        {{else}}
+        <li><a href="/orders">Заказы</a></li>
+        {{/if}}
+
+        {{#if isCalc}} 
+        <li class ="active"><a href="/">Калькулятор</a></li>
+        {{else}}
+        <li><a href="/calc">Калькулятор</a></li>
+        {{/if}}
+
+        {{#if isCard}} 
+        <li class ="active"><a href="/">Корзина</a></li>
+        {{else}}
+        <li><a href="/card">Корзина</a></li>
+        {{/if}}
+
+        <li><a href="/auth/logout">Выйти</a></li>
+    {{else}}
+       
+        {{#if isLogin}} 
+        <li class ="active"><a href="/auth/login#login">Войти</a></li>
+        {{else}}
+        <li><a href="/auth/login#login">Войти</a></li>
+        {{/if}}
+    {{/if}}
+
+      </ul>
+
+    </div>
+  </nav>
+   
+</div>

@@ -1,0 +1,300 @@
+{{!-- <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">Профиль</i></a> --}}
+<div class="main_header">
+    <h1>Инвест Блог</h1>
+</div>
+
+{{#if userQual}}
+  {{#if @root.isAuth}}
+    <span ><a class="waves-effect waves-light btn modal-trigger" id="modal_btn_test" href="#modalTest"> Пройти тест </a></span>
+        <div id="modalTest" class="modal modal-fixed-footer">
+          <div class="modal-content">
+
+                <div id="like_button_container"></div>
+           
+            {{!-- Когда все вопросы пройдены, модалка закрывается. при закрытии модалки, форма будет отправляться. --}}
+            </div>
+           <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+           </div>
+         </div>
+  {{/if}}
+{{/if}}
+<hr id="main_hr">
+<div class="main_descr">
+    <h3>Блог об инвестициях. <br>
+        Здесь вы можете подобрать уникальную, работающую торговую <br>
+        стратегию и поделиться опытом в блоге.
+     </h3> 
+
+       <div class="aboutAutor"> <p>Разработчик: Мелков Павел, версия - 2;</p></div>
+     
+</div>
+ <div class="teal lighten-2 between"></div>
+<div class="parallax-container">
+      <div class="parallax">
+          <img src="images/warren.jpg" >
+      </div>
+</div>
+ <div class="teal lighten-2 between"></div>
+
+<p class="subdescr_index">Самые популярные стратегии: </p> 
+
+<div id="main_descr_two">
+    <div class="row" id="index_row">
+
+    {{#each finally_sort_strats}}
+     <div class="col s4 m0">
+      <div class="card" id="index_card">
+        <div class="card-image" id="card_image">
+          <img class="img_strat" src="{{ img_strat }}" alt="{{ title_strat }}">
+          
+        </div>
+        
+        <div class="card-content">
+            <span class="card-title">{{ title_strat }}</span>
+            <p  class="price_strat">{{ price_strat }}</p>
+            <p> Риск/Прибыль: {{risk}}/{{profit}}</p>
+            
+            {{#if type_of_risk }}
+            <p>Высокорисковая</p>
+            {{else}}
+            <p>Консервативная</p>
+            {{/if}}
+        </div>
+        
+        <div class="card-action form_strat">
+
+          <a href="/blog/strat/{{_id}}" target = "_blank">Посмотреть</a>
+          {{#if @root.isAuth}}
+
+            <form action="/card/add" method="POST">
+                <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+                <input type="hidden" name="id" value="{{_id}}">
+                <button type="submit" class="btn btn-primary">Купить</button>
+            </form>
+           
+          {{/if}}
+          
+        </div>
+    
+      </div>
+    </div>
+    {{/each}}
+
+      
+    </div>
+</div>
+
+
+ <div class="teal lighten-2 between"></div>
+<div class="parallax-container" id="parallax2-container">
+      <div class="parallax" id="parallax2">
+          <img src="images/wall.jpg" >
+      </div>
+</div>
+
+ {{!-- <ul id="slide-out" class="sidenav">
+      
+      
+    <li><div class="user-view">
+      <div class="background">
+        <img src="images/inv.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="images/inv.jpg"></a>
+      <span class="white-text name">{{#each user}}{{name}}{{/each}}</span>
+      <span class="white-text email">{{#each user}}{{email}}{{/each}}</span>
+    </div></li>
+    <li><a href="#!"><i class="material-icons">Иконка</i>Первая ссылка </a></li>
+    <li><a href="#!">Вторая ссылка</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Подзаголовок</a></li>
+    <li><a class="waves-effect" href="#!">Третья ссыка с волной</a></li>
+  </ul> --}}
+    
+   <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+
+    <script type="text/babel">
+        
+        class Like extends React.Component {
+
+          state = {
+            questions: [ // 10 простых вопросов и 5 с картинками
+              {id: 1, question: 'Что предвещает перевернутая голова и плечи?', answers: ['Падение', 'Рост', 'Флет'], rightAnswer: 1},
+              {id: 2, question: 'Рынок находится в ожидании сильной новости: ваши действия?', answers: ['Буду ждать новость', 'Поставлю на какой-то результат', 'Ничего не буду делать'], rightAnswer: 2 },
+              {id: 3, question: 'Что такое "спринг"? ', answers:  ['Сильное кратковременное колебание цены', 'Сигнал продолжения роста', 'Колебание цены перед выходом из флэта'], rightAnswer: 3 },
+            ],
+            activeQuestion: 0,
+            rightAnswers: 0,
+            qual: null, // этот токен нужно поместить в mongoDB
+            end: false,
+          }
+
+          componentDidMount(){
+          
+        
+          }
+          // Беру токен из БД в get запросе. Если его там нет, то недоступен функционал добавления и открываю модалку с этим кодом. 
+          // Если токен есть, то модалка не откывается и доступен функционал добавления.
+          renderQuestion(questions, active) {
+          
+            return (
+              <div className={"questionContainer"}>
+                <p> {questions[active].question} </p>
+                {
+                  questions[active].answers.map( (answer, index) => {
+                    return(
+                      <div 
+                          className={"answer"}
+                          key={questions[active].id + Math.random()} 
+                          onClick={() => this.clickRightQuestion(index + 1, questions[active].rightAnswer)}> {answer}
+                      </div>
+                    ) 
+                  })
+                }
+              </div>
+            )
+          }
+
+          clickRightQuestion = (id, rightAnswer) => { // функция проверки ответа
+            if (id.toString() === rightAnswer.toString()) {
+               const newRightAnswers = this.state.rightAnswers + 1
+               let newQual = false
+               if (newRightAnswers > 1) {
+                 newQual = true
+               }
+               
+               this.setState({
+                rightAnswers: newRightAnswers,
+                activeQuestion: this.state.activeQuestion + 1,
+                qual: newQual,
+              })
+
+            } else {
+               this.setState({
+                activeQuestion: this.state.activeQuestion + 1,
+              })
+            }
+            return 
+          }
+
+          newQual(q) {
+            this.setState({
+              qual: q
+            })
+          }
+
+          postQual = () => {
+
+            this.setState({
+              end: true,
+            })
+            const user = event.target.dataset.user
+            console.log('user ', user)
+             const csrf = event.target.dataset.csrf
+              const qual = this.state.qual
+         
+                  let databody = {
+                       qual,
+                  }
+                  console.log('databoy ', databody)
+                  return fetch('/qual', {
+                      method: 'POST',
+                      body: JSON.stringify(databody),
+                      credentials: "same-origin",
+                      headers: {
+                        'x-xsrf-token': csrf,
+                          'Content-Type': 'application/json'
+                      },
+                  })
+                  .then(res => res.json())
+          }
+
+          render(){
+            
+             const cls = [
+            ]
+            if (this.state.end) {
+              cls.push("noneb")
+            } else {
+              cls.push("btn")
+              cls.push("btn-small")
+
+            }
+            return(
+              
+              <div className={"questionsContainer"}>
+                 
+                { (!(this.state.activeQuestion === this.state.questions.length)) ?
+                  this.renderQuestion(this.state.questions, this.state.activeQuestion)
+                  : 
+                <div className={"resultContainer"}> Тест закончен! Ваши баллы: <strong> {this.state.rightAnswers} </strong> 
+                  <div>
+
+                     <p>Ваш статус:
+                      { 
+                        this.state.qual ?
+                        <strong> Квалифицированный </strong>
+                        :
+                        <strong> Не квалифицированный </strong>
+                      }
+                      </p>
+                 
+                  </div>
+                </div>
+                  
+                }
+                <div>
+            
+                      <button
+                        className={cls.join(' ')} 
+                        data-user="{{user._id}}" 
+                        data-csrf="{{@root.csrf}}"
+                        onClick={() => this.postQual()}
+                    >Завершить!</button>
+           
+                
+                </div>
+              </div>
+             
+            )
+          }
+        }
+
+
+        ReactDOM.render(
+           <Like/>,
+        document.getElementById('like_button_container')
+      );
+
+    </script>
+       <div class="teal lighten-2 between"></div>
+            
+
+    <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Партнёры</h5>
+                <p class="grey-text text-lighten-4">С нами сотрудничают известные трейдеры: </p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Ссылки на соцсети</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Инстаграмм</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Ютуб</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">ВК</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">Больше информации</a>
+            </div>
+          </div>
+        </footer>

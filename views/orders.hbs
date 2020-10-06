@@ -1,0 +1,65 @@
+<h1>Заказы</h1>
+
+{{#if orders.length}}
+
+{{#each orders}}
+
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        Заказ <small>{{_id}}</small>
+                    </span>
+                    <p class="date">{{date}}</p>
+                    <p><em>{{user.name}}</em> ({{user.email}}) </p>
+                 
+                    <ol>
+                        {{#each strats}}
+                        <li>
+                           {{title_strat}} ( x{{count}} )
+                        </li>
+                        {{/each}}
+                    </ol>
+
+                    <hr>
+
+                    <p>Цена: <span class="price">{{price_strat}}</span> </p>
+                    <br/>
+                    {{#if pay}}
+                        <p style="color: green; font-size: 18px"> Заказ оплачен. Ожидайте письма. </p>
+                    {{else}}
+                        <form action="/orders/pay" method="POST" > 
+                            <script 
+                                src="https://checkout.stripe.com/checkout.js"
+                                class="stripe-button"
+                                data-key="pk_test_51HYrXKJTwv9il0JPogiimBZKtiOpwSUTyOUYHBWEr6LdD7a20LND3yJsdrkrWVn9cOPfRXEAmrRofAuUVpvuQZr100u6MhQxKl"
+                                data-amount={{price_strat}}
+                                data-name="Invest Blog"
+                                data-description="Buy strategy"
+                                data-image="/images/qqq.JPG"
+                                data-locale="auto"      
+                            >
+                            </script>
+                            <script>
+                                var elems = document.getElementsByClassName('stripe-button-el');
+                                    elems = Array.prototype.slice.call(elems); 
+                                    elems.forEach(function(elem) {
+                                        elem.style.display = "none"
+                                    });
+                            </script>
+                            <input type="hidden" name="_id" value="{{_id}}">
+                            <input type="hidden" name="price_strat" value="{{price_strat}}">
+                            <button type="submit" class="btn btn-primary" data-csrf="{{@root.csrf}}" > Оплатить </button>
+                        </form>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/each}}
+{{else}}
+
+<p>Больше заказов нет</p>
+
+{{/if}}

@@ -1,0 +1,36 @@
+<h1>Редактирование поста "{{post.title_post}}"</h1>
+
+<form action="/blog/post/edit" method="POST" novalidate>
+        <div class="input-field">
+            <input id="title_post" name ="title_post" type="text" class="validate" required value="{{post.title_post}}">
+            <label for="title_post">Название поста</label>
+            <span class="helper-text" data-error="Это поле не должно быть пустым" minlength="2"></span>
+        </div>
+
+        <div class="input-field">
+            <input id="descr_post" name ="descr_post" type="text" class="validate" required value="{{post.descr_post}}">
+            <label for="descr_post">Редактировать описание</label>
+            <span class="helper-text" data-error="Это поле не должно быть пустым" minlength="2"></span>
+        </div>
+        
+            <div class="input-field col s12">
+                <textarea id="text" class="materialize-textarea" name ="text_post" class="validate" type="text" required >{{post.text_post}}</textarea>
+                <label for="text_post">Текст поста</label>
+            </div>
+
+            <div class="input-field col s4">
+                <input id="img_post" name ="img_post" type="text" class="validate" required value="{{post.img_post}}">
+                <label for="img_post">Добавить изображение</label>
+                <span class="helper-text" data-error="need to input image url"></span>
+            </div>
+            
+            <input type="hidden" name="id" value="{{post._id}}">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+            <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+
+    <form action="/blog/post/remove" method="POST" id="delete_btn">
+        <input type="hidden" name="id" value="{{post._id}}">
+        <button type="submit" class="btn red">Delete</button>
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+    </form>

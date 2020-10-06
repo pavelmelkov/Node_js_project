@@ -1,0 +1,30 @@
+<h1>Редактирование стратегии "{{strat.title_strat}}"</h1>
+
+<form action="/blog/strat/edit" method="POST" novalidate>
+        <div class="input-field">
+            <input id="title_strat" name ="title_strat" type="text" class="validate" required value="{{strat.title_strat}}">
+            <label for="title_strat">Название стратегии</label>
+            <span class="helper-text" data-error="Это поле не должно быть пустым" minlength="2"></span>
+        </div>
+        
+            <div class="input-field col s12">
+                <textarea id="text" class="materialize-textarea" name ="text_strat" class="validate" type="text" required >{{strat.text_strat}}</textarea>
+                <label for="text_post">Текст</label>
+            </div>
+        
+            <div class="input-field col s4">
+                <input id="img_strat" name ="img_strat" type="text" class="validate" required value="{{strat.img_strat}}">
+                <label for="img_strat">Добавить изображение</label>
+                <span class="helper-text" data-error="Надо вставить url"></span>
+            </div>
+            
+        <input type="hidden" name="id" value="{{strat._id}}">
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+        <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+
+    <form action="/blog/strat/remove" method="POST" id="delete_btn">
+        <input type="hidden" name="id" value="{{strat._id}}">
+        <button type="submit" class="btn red">Удалить</button>
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+    </form>

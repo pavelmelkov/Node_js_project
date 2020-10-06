@@ -1,0 +1,85 @@
+{{> head }}
+<body>
+    {{> navbar}}
+   
+        {{{ body  }}} 
+{{#if isAuth}}
+  <ul id="slide-out" class="sidenav">
+      
+      
+    <li><div class="user-view">
+      <div class="background">
+        <img src="images/inv.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="{{user.avatarUrl}}" alt="avatar-{{user.name}}"></a>
+      <span class="black-text name">{{user.name}}</span>
+      <span class="black-text email" id="span_btn_profile">{{user.email}}</span>
+      <span ><a class="waves-effect waves-light btn modal-trigger" id="modal_btn_profile" href="#modal2">Изменить</a></span>
+    </div></li>
+    
+ 
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Стратегии:</a></li>
+    <div class="strats_profile">
+    <div id="body">
+    {{#each strats}}
+  
+    <li><a class="waves-effect" href="#!">{{title_strat}}</a></li>
+    <div class="strat_container">
+      <div class="into_one">
+          {{#if @root.isAuth}}
+              <a href="/blog/strat/{{_id}}/edit?allow=true">Редактировать</a>
+          {{/if}}
+      </div>
+
+      <div class="into_two" id="into_remove">
+           <form action="/blog/strat/remove" method="POST" id="delete_btn">
+                <input type="hidden" name="id" value="{{_id}}">
+                <button type="submit" class="btn red profile_button">Удалить</button>
+                <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+            </form>
+      </div>
+            
+     </div>
+      
+    
+    {{/each}}
+    </div>
+    </div>
+    
+  </ul>
+{{/if}}
+
+              <div id="modal2" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                  <form action="/edit_profile" method="POST" enctype="multipart/form-data">
+                    <p> Ваш email: <strong>{{user.email}}</strong></p>
+                      <div class="input-field">
+                          <input id="name" name ="name" type="text" class="validate" required value="{{user.name}}">
+                          <label for="name">Имя пользователя</label>
+                          <span class="helper-text" data-error="This field is required" minlength="2"></span>
+                      </div>
+
+                      <div class="file-field input-field">
+                          <div class="btn">
+                              <span>Аватар</span>
+                              <input type="file" name="avatar">
+                          </div>
+
+                          <div class="file-path-wrapper">
+                              <input type="text" class="file-path validate">
+                          </div>
+                      </div>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <button type="submit" class="btn">Изменить</button>
+                  </form>
+                 </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+                </div>
+              </div>
+
+
+    {{> footer }}
+</body>
+</html>

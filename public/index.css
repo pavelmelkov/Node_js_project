@@ -1,0 +1,325 @@
+.nav-wrapper .brand-logo {
+    padding-left: 40px;
+}
+.nav-wrapper {
+    background-color: #e57373;
+    position: fixed;
+}
+
+.card-image  {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+.card-image img{
+    height: 100%;
+    width: 100%;
+}
+
+.strat {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.strat h1{
+    text-align: center;
+    display: block;
+}
+
+.strat .watch{
+    display: block;
+    text-align: center;
+}
+
+.strat .text{
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    width: 80%;
+    margin-top: 20px;
+    padding-top: 10px;
+    transform: translateX(12.5%); /* Размеры */
+    background: rgb(255, 255, 255); /* Цвет фона */
+    outline: 2px solid #000; /* Чёрная рамка */
+    border: 3px solid rgb(161, 161, 161); /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+}
+
+.strat .price_strat {
+    display: block;
+    text-align: center;
+    transform: translateX(350px);
+    font-size: 20px;
+    padding-top: 45px;
+}
+
+.parallax-container{
+    height: 300px;
+    width: 100%;
+  }
+
+  .strat_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(236, 236, 236);
+    height: 60px;
+  }
+
+
+
+  .card_container {
+    display: flex;
+    justify-content: space-between;
+    width: 65%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .card_container a {
+    display: block;
+   
+  }
+
+  .into_one{
+    display: block;
+    padding-left: 10%;
+  }
+
+  .into_two {
+    display: block;
+    padding-right: 10%;
+    padding-bottom: 12px;
+  }
+
+  .into_two .profile_button {
+    height: 35px;
+    
+  }
+
+  .alert {
+    padding: 10px 5px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    background: rgba(255, 0, 0, .3);
+    color: red
+}
+  
+  #delete_btn {
+    margin-top: 15px;
+} 
+
+  .main_descr {
+      padding-bottom: 30px;
+  }
+
+  .main_header{
+      padding-left: 7%;
+  }
+  .main_subheader{
+    padding-left: 7%;
+  }
+  .main_descr{
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+  /* .parallax-container .parallax{
+    position:static;
+  } */
+  .main_hr{
+      width: 80%;
+  }
+
+  .main_descr h3 {
+    font-size:29px;
+  }
+
+  .info{
+      padding-left: 7%;
+      font-size: 30px;
+        height: 300px;
+        padding-top: 10%;
+  }
+  .main_descr_two{
+      text-align: center;
+      font-size: 40px;
+  }
+  .form_strat {
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .form_strat form {
+      display: block;
+  }
+
+  .form_strat a{
+      display: block;
+  }
+
+  .result {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .result .result_button{
+    display: block;
+  }
+
+  .result .result_value{
+    display: block;
+    padding-left: 50px;
+
+  }
+
+  #profile_ {
+    display: inline-block;
+  }
+
+  .account_container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    vertical-align: top;
+  }
+
+  .material-icons {
+    display: block;
+  }
+
+  .sidenav_trigger {
+    display: block;
+  }
+
+  .subdescr_index {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  #main_descr_two {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #card_image {
+    height: 222px;
+  }
+
+  .main_descr .main_subdescr {
+    font-size: 12px;
+  }
+
+  #modal_btn_profile {
+    display: block;
+    width: 100px;
+    height: 30px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-top: -2px;
+    padding-left: 15px;
+  }
+
+  #span_btn_profile {
+
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+  }
+  #modal_btn_test{
+    display: flex;
+    margin: 0 auto;
+    padding-top: 0px;
+    margin-bottom: 25px;
+    justify-content: center;
+    width: 200px;
+  }
+
+  .background {
+    margin-bottom: -10px;
+  }
+
+#index_row {
+    width: 900px;
+}
+  
+#question {
+  cursor: pointer;
+}
+
+.questionsContainer{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  flex-direction: column;
+}
+
+.questionContainer{
+  border: 2px solid rgb(49, 49, 49);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.questionContainer p {
+  padding-bottom: 20px;
+  font-size: 25px;
+
+
+}
+
+.answer {
+  padding: 4px;
+  margin: 8px;
+  font-size: 21px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+  transition: background-color .2s ease-in-out;
+}
+
+.answer:hover {
+  background-color: rgb(172, 172, 172);
+  border: 1px solid rgb(59, 59, 59);
+}
+
+.resultContainer{
+  color: #000;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.aboutAutor {
+  border: 1px solid rgba(44, 44, 44, 0.7);
+  box-shadow:0 1px 3px 0 rgb(59, 59, 59, .7);
+  padding: 10px;
+  text-align: center;
+}
+
+.aboutAutor:hover {
+  border: 1px solid rgba(68, 68, 68, 0.7);
+  box-shadow: 0 2px 4px 0 rgb(59, 59, 59, .7);
+}
+
+#parallax2 {
+  height: 700px;
+}
+
+#parallax2-container {
+  height: 700px;
+}
+
+.between {
+  height: 12px;
+}
+
+.noneb {
+  display: none;
+}
+
+

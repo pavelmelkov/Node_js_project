@@ -1,0 +1,54 @@
+<h1>Калькулятор эффективности</h1>
+
+<div class="subheader">
+    <p>Выберите вид стратегии</p>
+</div>
+ <form action="#">
+     <div class="check">
+        <div class="check_into">
+            <p>
+            <label>
+                <input type="checkbox" id="check_risk" />
+                <span>Высокорисковая</span>
+            </label>
+            </p>
+        </div>
+
+        <div class="check_into">
+            <p>
+            <label>
+                <input type="checkbox" id="check_kons" />
+                <span>Консервативная</span>
+            </label>
+            </p>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+    </div>
+</form>
+
+
+    <br>
+
+   <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Риск" id="risk" type="number" class="validate">
+          <label for="risk">Риск</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="profit" type="number" class="validate">
+          <label for="profit">Прибыль</label>
+        </div>
+      </div>
+      <div class="result">
+        <div class="result_button">
+          <a class="waves-effect waves-light btn">Рассчитать</a>
+        </div>
+        <div class="result_value">
+          <blockquote id="result_value">Результат</blockquote>
+        </div>
+      </div>
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+    </form>
+</div>
