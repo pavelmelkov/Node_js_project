@@ -152,6 +152,7 @@ document.getElementById('check_kons').addEventListener('click', function() {
 
 
 document.querySelector('.result_button').addEventListener('click', function() {
+  
   const Ak = 6
   const Bk = 2
   const Ap = 4

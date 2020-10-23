@@ -9,11 +9,6 @@ const user = new Schema({
         required: true
     },
     name: String,
-    
-    // password: {
-    //     type: String,
-    //     required: true
-    // },
     resetToken: String,
     resetTokenExp: Date,
     avatarUrl: String,

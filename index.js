@@ -1,21 +1,22 @@
-const express = require('express')
-const cookieParser = require('cookie-parser')
-const app = express()
-global.bodyParser = require('body-parser');
-const csrf = require('csurf') // для защиты роутов
-const flash = require('connect-flash') // оповещения 
+const express = require('express')                  // 1 подключаем в начале
+const cookieParser = require('cookie-parser')       // 1
+const app = express()                               // 1
+global.bodyParser = require('body-parser');         // 1
+const csrf = require('csurf') // для защиты роутов  //
+const flash = require('connect-flash') // оповещения //
 // пути
-const path = require('path')
-const fs = require('fs')
-const compression = require('compression')
-const helmet = require('helmet')
-const exphbs = require('express-handlebars') // для роутинга
+const path = require('path')    // 1
+const fs = require('fs')        //
+const compression = require('compression')  // 
+const helmet = require('helmet')            // 
+
+const exphbs = require('express-handlebars') // 1 для роутинга
 
 // сессиии
-const session = require('express-session')
+const session = require('express-session')  //
 // соединение с монго
-const MongoStore = require('connect-mongodb-session')(session)
-const userMiddleware = require('./middleware/user')
+const MongoStore = require('connect-mongodb-session')(session)  //
+const userMiddleware = require('./middleware/user')             //
 
 // подключение роутов
 const addRoute = require('./routes/add')
